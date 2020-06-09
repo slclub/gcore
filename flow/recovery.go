@@ -49,13 +49,19 @@ func RecoverNode() {
 	if err == nil {
 		return
 	}
+
+	debug := link.GetString("debug", "debug")
 	s, ok := err.(string)
 	if !ok {
 		return
 	}
+	if debug == "panic" {
+		panic(s)
+	}
 
 	i := strings.IndexByte(s, ':')
 	if i <= 0 {
+		link.ERROR(s)
 		return
 	}
 
@@ -69,6 +75,8 @@ func RecoverNode() {
 		panic(s)
 	case gerror.CONST_ERRNO_PANIC:
 		panic(s)
+	default:
+		link.ERROR(s)
 	}
 	//fmt.Println(code)
 }

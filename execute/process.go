@@ -11,6 +11,13 @@ type Process struct {
 	flow.ExecuteNode
 }
 
+func NewProcess() *Process {
+	p := &Process{}
+	p.SetKey("handle")
+	//p.InitInvoker()
+	return p
+}
+
 func (p *Process) Execute(ctx gnet.Contexter) {
 	ctx.GetHandler()(ctx)
 }

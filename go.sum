@@ -143,6 +143,7 @@ github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFR
 github.com/ryanuber/columnize v0.0.0-20160712163229-9b3edd62028f/go.mod h1:sm1tb6uqfes/u+d4ooFouqFdy9/2g9QGwK3SQygK0Ts=
 github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529/go.mod h1:DxrIzT+xaE7yg65j358z/aeFdxmN0P9QXhEzd20vsDc=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
+github.com/slclub/gcore v0.0.0-20200608164630-663e3c6d49cf/go.mod h1:CiQNaAlPU32+gpIHLDLNiV19gSTYcfPKh20VeTIyf48=
 github.com/slclub/gerror v0.0.0-20200605170533-056a97d00f25 h1:d/tZOF+7PFsSL1jDDpnw3xnQXfWr61DFboT7nEgcats=
 github.com/slclub/gerror v0.0.0-20200605170533-056a97d00f25/go.mod h1:H4sTdpeFUJMjN6atbfOLBQfdpptVYCfrBNPp90TEPRE=
 github.com/slclub/glog v0.0.7 h1:r/2kjlPox3+rUUERnb0fRBioi2okq0llkEbsjBdcR8M=
@@ -157,6 +158,8 @@ github.com/slclub/goqueue v0.0.4 h1:2lyYr243RLUYdrcv7KCHmRwfQVjXHt86O61hav/co7A=
 github.com/slclub/goqueue v0.0.4/go.mod h1:5Pm6g6fWEMUZTQvZqUHyKygdV4VEqHO3joxCoDYFj5Q=
 github.com/slclub/grouter v0.0.0-20200608154541-6a3fcf1718e0 h1:9pmrhgn7LtOFomKiDstEyocUZV3oX6lzk88K1cQXpIk=
 github.com/slclub/grouter v0.0.0-20200608154541-6a3fcf1718e0/go.mod h1:biIOH/sx78aJxd6Oc9Ho/svruy2IW/GBFR7FugHvLIA=
+github.com/slclub/grouter v0.0.0-20200608171113-fedbbdc8a545 h1:ny9W1YbhAPAUtV7B0cuTtHdMkZ96G6POBLT8Vmk5MUQ=
+github.com/slclub/grouter v0.0.0-20200608171113-fedbbdc8a545/go.mod h1:DG0UFxGMxxUP0PfuZVbdz7H1Q9wzdRfcY5yeMTSKMNk=
 github.com/slclub/link v0.0.0-20200605085902-9e7733b41a86 h1:VmVPzAK8CunO5CCBdex/fTjo6ARBt7rQQUl9XJSopGc=
 github.com/slclub/link v0.0.0-20200605085902-9e7733b41a86/go.mod h1:sgajmBtcnGK5EOEFFj+e10XReEc4G8O/mLHt2i+HMm0=
 github.com/slclub/utils v0.0.0-20200528050629-ce1b1f9fff5d/go.mod h1:+gWlPXvzOkXO5N6/cNdUYikqW6uVZ8guo32Nr5cXJ7k=
