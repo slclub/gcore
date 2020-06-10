@@ -3,6 +3,7 @@ package gcore
 import (
 	"github.com/slclub/gcore/execute"
 	"github.com/slclub/grouter"
+	"github.com/slclub/link"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
@@ -43,4 +44,15 @@ func TestEnginFake(t *testing.T) {
 	en.core.ServeHTTP(w, req)
 
 	//en.Run()
+}
+
+func TestEngineWithConfig(t *testing.T) {
+
+	en := New()
+	en.HttpTLS()
+	en.UnixSock()
+
+	link.Config().Set("http.enable", false)
+	en.Http()
+	en.WebSocket()
 }

@@ -1,6 +1,7 @@
 package execute
 
 import (
+	// "fmt"
 	"github.com/slclub/gcore/flow"
 	"github.com/slclub/gnet"
 	"github.com/slclub/gnet/permission"
@@ -34,6 +35,8 @@ func (m *MiddleWare) Execute(ctx gnet.Contexter) {
 
 	for i, handle := range m.handle_chains {
 		// validate by invoker
+		// id, ok := m.Invoker().GetId(m.handle_names[i])
+		// fmt.Println("before middle", m.handle_names[i], id, ok, m.Invoker().Validate(0, nil))
 		if !m.Invoker().ValidateByName(m.handle_names[i], ctx.GetAccess()) {
 			continue
 		}
