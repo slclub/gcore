@@ -19,5 +19,9 @@ func NewProcess() *Process {
 }
 
 func (p *Process) Execute(ctx gnet.Contexter) {
+	exec := ctx.GetExecute()
+	if exec != nil {
+		exec.Execute(ctx)
+	}
 	ctx.GetHandler()(ctx)
 }

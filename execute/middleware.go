@@ -14,6 +14,9 @@ type Middler interface {
 	// middle ware interface
 	Use(gnet.HandleFunc)
 	Deny(gnet.HandleFunc)
+
+	GetHandle(i int) (gnet.HandleFunc, string)
+	Combine(Middler)
 }
 
 type MiddleWare struct {
@@ -58,5 +61,27 @@ func (m *MiddleWare) Deny(handle gnet.HandleFunc) {
 		if name == nm {
 			m.Invoker().AutoSet(name, permission.SCOPE_UNUSED)
 		}
+	}
+}
+
+func (m *MiddleWare) GetHandle(i int) (gnet.HandleFunc, string) {
+	if i >= len(m.handle_chains) {
+		return nil, ""
+	}
+	return m.handle_chains[i], m.handle_names[i]
+}
+
+func (m *MiddleWare) Combine(one Middler) {
+	if m == nil {
+		return
+	}
+	i := 0
+	for {
+		handle, _ := one.GetHandle(i)
+		if handle == nil {
+			return
+		}
+		m.Use(handle)
+		i++
 	}
 }
