@@ -17,6 +17,7 @@ type Middler interface {
 
 	GetHandle(i int) (gnet.HandleFunc, string)
 	Combine(Middler)
+	Size() int
 }
 
 type MiddleWare struct {
@@ -86,4 +87,8 @@ func (m *MiddleWare) Combine(one Middler) {
 		m.Use(handle)
 		i++
 	}
+}
+
+func (m *MiddleWare) Size() int {
+	return len(m.handle_names)
 }
