@@ -52,10 +52,22 @@ func (m *MiddleWare) Execute(ctx gnet.Contexter) {
 
 func (m *MiddleWare) Use(handle gnet.HandleFunc) {
 	name := utils.FUNC_NAME(handle)
-	m.handle_chains = append(m.handle_chains, handle)
-	m.handle_names = append(m.handle_names, name)
+
+	if !m.exist(name) {
+		m.handle_chains = append(m.handle_chains, handle)
+		m.handle_names = append(m.handle_names, name)
+	}
 
 	m.Invoker().AutoSet(name, permission.SCOPE_USED)
+}
+
+func (m *MiddleWare) exist(name string) bool {
+	for _, v := range m.handle_names {
+		if v == name {
+			return true
+		}
+	}
+	return false
 }
 
 func (m *MiddleWare) Deny(handle gnet.HandleFunc) {
