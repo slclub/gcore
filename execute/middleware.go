@@ -10,7 +10,7 @@ import (
 
 type Middler interface {
 	// public excuter interface.
-	gnet.Executer
+	flow.IExecuteNode
 	// middle ware interface
 	Use(gnet.HandleFunc)
 	Deny(gnet.HandleFunc)
@@ -25,6 +25,8 @@ type MiddleWare struct {
 	handle_chains []gnet.HandleFunc
 	handle_names  []string
 }
+
+var _ Middler = &MiddleWare{}
 
 func NewMiddle(name string) Middler {
 	m := &MiddleWare{}
