@@ -74,7 +74,7 @@ func (m *MiddleWare) GetHandle(i int) (gnet.HandleFunc, string) {
 }
 
 func (m *MiddleWare) Combine(one Middler) {
-	if m == nil {
+	if one == nil {
 		return
 	}
 	i := 0
