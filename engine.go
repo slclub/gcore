@@ -20,6 +20,11 @@ type Engine struct {
 func New() *Engine {
 	en := &Engine{}
 	en.core = NewCore()
+	return en
+}
+
+func (en *Engine) Start() {
+	// config
 	en.http_addr = addr.NewAddr(
 		link.GetString("http.host", ""),
 		link.GetString("http.port", ""),
@@ -30,11 +35,12 @@ func New() *Engine {
 		link.GetString("https.port", ""),
 		link.GetString("https.name", ""),
 	)
-	return en
+
 }
 
 // ****************************************serve*******************************************
 func (en *Engine) Run() {
+	en.Start()
 	en.Http()
 	en.HttpTLS()
 	en.UnixSock()

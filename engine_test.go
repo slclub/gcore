@@ -12,6 +12,7 @@ import (
 
 func TestEnginFake(t *testing.T) {
 	en := New()
+	en.Start()
 
 	assert.Equal(t, "127.0.0.1:8080", en.http_addr.String())
 

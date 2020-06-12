@@ -3,7 +3,9 @@ package execute
 import (
 	// "fmt"
 	"github.com/slclub/gcore/flow"
+	"github.com/slclub/gerror"
 	"github.com/slclub/gnet"
+	"github.com/slclub/gnet/defined"
 	"github.com/slclub/gnet/permission"
 	"github.com/slclub/utils"
 )
@@ -51,6 +53,9 @@ func (m *MiddleWare) Execute(ctx gnet.Contexter) {
 }
 
 func (m *MiddleWare) Use(handle gnet.HandleFunc) {
+	if handle == nil {
+		gerror.Panic(defined.CODE_NOT_ALLOWED_EMPTY_HANDLE, "[GCORE][MIDDLER][EMPTY handle]")
+	}
 	name := utils.FUNC_NAME(handle)
 
 	if !m.exist(name) {
