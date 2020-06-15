@@ -2,12 +2,14 @@ package gcore
 
 import (
 	"github.com/slclub/gcore/execute"
+	"github.com/slclub/gnet"
 	"github.com/slclub/grouter"
 	"github.com/slclub/link"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 func TestEnginFake(t *testing.T) {
@@ -43,17 +45,42 @@ func TestEnginFake(t *testing.T) {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/Ping/xiaoming", nil)
 	en.core.ServeHTTP(w, req)
-
+	en.core.pool.New()
 	//en.Run()
 }
 
 func TestEngineWithConfig(t *testing.T) {
 
 	en := New()
+	en.Start()
 	en.HttpTLS()
 	en.UnixSock()
 
 	link.Config().Set("http.enable", false)
 	en.Http()
+	en.HttpTLS()
+	en.UnixSock()
 	en.WebSocket()
+	en.core.GetFlow()
+
+	en.OverAllocate = func() gnet.Contexter {
+		ctx := gnet.NewContext()
+		r := gnet.NewRequest()
+		s := &gnet.Response{}
+		ctx.SetRequest(r)
+		ctx.SetResponse(s)
+		return ctx
+	}
+	en.core.pool.New()
+	assert.NotNil(t, en.https_addr)
+}
+
+func TestEngineRun(t *testing.T) {
+	en := New()
+	en.Start()
+
+	func() {
+		en.Run()
+	}()
+	time.Sleep(4 * time.Second)
 }

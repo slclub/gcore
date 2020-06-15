@@ -90,6 +90,7 @@ func (en *Engine) UnixSock() (err error) {
 	defer listener.Close()
 	defer os.Remove(file)
 	err = http.Serve(listener, en.core)
+	//link.INFO(err)
 	return
 }
 
