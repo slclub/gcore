@@ -10,6 +10,7 @@ import (
 type Core struct {
 	run_flow *flow.Flow
 	pool     sync.Pool
+	engine   *Engine
 }
 
 func NewCore() *Core {
@@ -22,6 +23,10 @@ func NewCore() *Core {
 }
 
 func (core *Core) allocate() gnet.Contexter {
+	// rewrite allocate by user.
+	if core.engine.OverAllocate != nil {
+		return core.engine.OverAllocate()
+	}
 	ctx := gnet.NewContext()
 	r := gnet.NewRequest()
 	s := &gnet.Response{}
@@ -49,7 +54,6 @@ func (core *Core) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	ctx.Reset()
 	core.pool.Put(ctx)
-
 }
 
 func (core *Core) GetFlow() *flow.Flow {

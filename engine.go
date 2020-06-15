@@ -2,6 +2,7 @@ package gcore
 
 import (
 	"github.com/slclub/gcore/execute"
+	"github.com/slclub/gnet"
 	"github.com/slclub/gnet/addr"
 	"github.com/slclub/grouter"
 	"github.com/slclub/link"
@@ -15,11 +16,14 @@ type Engine struct {
 	https_addr addr.Addr
 	web_socket addr.Addr
 	core       *Core
+	// overide core.allocate
+	OverAllocate func() gnet.Contexter
 }
 
 func New() *Engine {
 	en := &Engine{}
 	en.core = NewCore()
+	en.core.engine = en
 	return en
 }
 
@@ -35,7 +39,6 @@ func (en *Engine) Start() {
 		link.GetString("https.port", ""),
 		link.GetString("https.name", ""),
 	)
-
 }
 
 // ****************************************serve*******************************************
