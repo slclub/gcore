@@ -44,7 +44,7 @@ func TestEnginFake(t *testing.T) {
 	// fake http request
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/Ping/xiaoming", nil)
-	en.core.ServeHTTP(w, req)
+	en.Core().ServeHTTP(w, req)
 	en.core.pool.New()
 	//en.Run()
 }

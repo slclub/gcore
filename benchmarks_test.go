@@ -15,6 +15,12 @@ func BenchmarkServer(B *testing.B) {
 	run_request(B, app, "GET", "/my/ho/xiaoming/boy")
 }
 
+func BenchmarkServerHello(B *testing.B) {
+	app := createServer()
+	addroute(app)
+	run_request(B, app, "GET", "/my/page")
+}
+
 func createServer() *Engine {
 	en := New()
 
@@ -47,6 +53,9 @@ func addroute(en *Engine) {
 		//fmt.Println("xiaoming")
 		ctx.Response().WriteString("hello world! " + s1 + ":" + s2)
 	})
+	dr.GET("/my/page", func(ctx gnet.Contexter) {
+		ctx.Response().WriteString("hello world!")
+	})
 
 	//dr.ServerFile("/assets/", http.Dir("./assets"))
 	dr.ServerFile("/st/:filepath", ("./assets/"), true)
@@ -68,7 +77,7 @@ func run_request(B *testing.B, en *Engine, method, path string) {
 	B.ReportAllocs()
 	B.ResetTimer()
 	for i := 0; i < B.N; i++ {
-		en.core.ServeHTTP(w, req)
+		en.Core().ServeHTTP(w, req)
 	}
 }
 

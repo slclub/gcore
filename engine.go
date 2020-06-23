@@ -99,6 +99,11 @@ func (en *Engine) WebSocket() (err error) {
 	return
 }
 
+// return core of engine.
+func (en *Engine) Core() *Core {
+	return en.core
+}
+
 // ****************************************serve*******************************************
 
 // ****************************************driver*******************************************
